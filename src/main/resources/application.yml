@@ -1,0 +1,44 @@
+server:
+  port: ${PORT:9090}
+
+spring:
+  application:
+    name: studybox-backend
+
+  datasource:
+    url: jdbc:h2:file:./data/studybox;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+studybox:
+  jwt:
+    # Demo-only secret. Replace with an env-injected value before any real deployment.
+    secret: "c3R1ZHlib3gtZGVtby1zaWduaW5nLWtleS1jaGFuZ2UtbWUtYmVmb3JlLXByb2R1Y3Rpb24tdXNlLTEyMw=="
+    expiration-minutes: 720
+  seed:
+    # Re-run seed data even if the DB already has rows (handy while iterating locally).
+    force: false
+    # Fictional demo student + classmates + their activity history. Off by default: the
+    # database starts with just the course/instructor structure and an admin login, and the
+    # Super Admin dashboard is the only way real student data enters it. Set to true for a
+    # filled-in sandbox to explore instead.
+    demo-data: false
+
+logging:
+  level:
+    com.studybox: INFO
